@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var recordingType: UISegmentedControl!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelUnlimited: UIButton!
     
     @IBOutlet weak var typeDescription: UILabel!
     @IBOutlet weak var beginButton: UIButton!
@@ -30,22 +31,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentDay: UILabel!
     @IBOutlet weak var kicksPerCurrentDay: UILabel!
     
+    @IBOutlet weak var dimView: UIView!
+    @IBOutlet weak var confirmView: UIView!
+    
     @IBOutlet weak var bottomBannerAd: GADBannerView!
     
     // MARK: Variables
     
     private let kickViewModel = KickViewModel()
+    var dateFormatter = DateFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        kickViewModel.loadKicks()
         
-        recordKickButton.alpha = 0.5
-        recordKickButton.isEnabled = false
-        countdownTimer.isHidden = true
-        cancelButton.isHidden = true
+        dateFormatter.dateFormat = "yyyy-MM-dd 'at' hh:mm a"
+        
         bottomBannerAd.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBannerAd.rootViewController = self
+        
+        configureView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -58,6 +64,25 @@ class ViewController: UIViewController {
         coordinator.animate(alongsideTransition: { _ in
             self.loadBannerAd()
         })
+    }
+    
+    func configureView() {
+        recordKickButton.alpha = 0.5
+        recordKickButton.isEnabled = false
+        countdownTimer.isHidden = true
+        cancelButton.isHidden = true
+        cancelUnlimited.isHidden = true
+        dimView.isHidden = true
+        confirmView.isHidden = true
+        
+        if let last = kickViewModel.getLastKick() {
+            recentKick.text = dateFormatter.string(from: last)
+        } else {
+            recentKick.text = "No Data"
+        }
+        
+        currentDay.text = "\(kickViewModel.kicksToday())"
+        currentHour.text = "\(kickViewModel.kicksHour())"
     }
     
     func loadBannerAd() {
@@ -93,14 +118,15 @@ class ViewController: UIViewController {
         switch type {
         case .hour:
             // start timer
+            countdownTimer.isHidden = false
             recordingType.isHidden = true
             beginButton.isHidden = true
-            countdownTimer.isHidden = false
             cancelButton.isHidden = false
+            TimerManager.beginTimer(label: countdownTimer)
         case .free:
             recordingType.isHidden = true
             beginButton.isHidden = true
-            cancelButton.isHidden = false
+            cancelUnlimited.isHidden = false
         case .none:
             return
         }
@@ -110,20 +136,57 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        // confirm exiting mode
+        // button pressed to end timed session
+        // confirm exiting timed mode
         print("cancel")
-        // if cancel confirmed
+        dimView.isHidden = false
+        confirmView.isHidden = false
+    }
+    
+    @IBAction func recordKickPressed(_ sender: UIButton) {
+        print("kick")
+        var type = kickViewModel.retrieveSessionType()
+        
+        switch type {
+        case .hour:
+            kickViewModel.addKick(date: Date(), isHourSession: true)
+            recentKick.text = dateFormatter.string(from: Date())
+        case .free:
+            kickViewModel.addKick(date: Date(), isHourSession: false)
+            recentKick.text = dateFormatter.string(from: Date())
+        case .none:
+            return
+        }
+    }
+    
+    @IBAction func cancel(_ sender: UIButton) {
+        // if cancel confirmed for timed session
         countdownTimer.isHidden = true
         beginButton.isHidden = false
         recordKickButton.alpha = 0.5
         recordKickButton.isEnabled = false
         cancelButton.isHidden = true
         recordingType.isHidden = false
+        dimView.isHidden = true
+        confirmView.isHidden = true
+        TimerManager.stopTimer()
     }
     
-    @IBAction func recordKickPressed(_ sender: UIButton) {
-        print("kick")
+    @IBAction func cancelUnlimited(_ sender: UIButton) {
+        // unlimited recording mode cancelled
+        beginButton.isHidden = false
+        recordKickButton.alpha = 0.5
+        recordKickButton.isEnabled = false
+        cancelUnlimited.isHidden = true
+        recordingType.isHidden = false
     }
+    
+    @IBAction func doNotCancel(_ sender: UIButton) {
+        // cancellation message dismissed for timed session
+        dimView.isHidden = true
+        confirmView.isHidden = true
+    }
+    
     
     @IBAction func seeHistory(_ sender: UIButton) {
         performSegue(withIdentifier: "seeHistory", sender: Any?.self)

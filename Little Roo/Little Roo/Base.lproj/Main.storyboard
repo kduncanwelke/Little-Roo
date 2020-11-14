@@ -26,10 +26,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="037-it-SEq">
-                                <rect key="frame" x="81.5" y="51.5" width="251" height="32"/>
+                                <rect key="frame" x="56.5" y="51.5" width="301" height="32"/>
                                 <segments>
                                     <segment title="   Hour Session   "/>
-                                    <segment title="   Record Freely   "/>
+                                    <segment title="   Unlimited Session   "/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="BGt-Pe-EMC"/>
@@ -171,21 +171,93 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGe-Xz-TgP">
-                                <rect key="frame" x="157" y="170.5" width="100.5" height="42"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
+                                <rect key="frame" x="148.5" y="170" width="117.5" height="48"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <color key="textColor" red="0.3093738721" green="0.68297511990000004" blue="0.3475986707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN2-H5-l6g">
-                                <rect key="frame" x="104" y="50.5" width="206" height="33"/>
+                                <rect key="frame" x="113.5" y="50.5" width="187" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Cancel Current Recording">
+                                <state key="normal" title="Cancel Current Session">
                                     <color key="titleColor" red="0.79733405409730629" green="0.0" blue="0.089166356404335817" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qVy-OY-2fP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SR-G6-YiP">
+                                <rect key="frame" x="107" y="50.5" width="200" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Quit Unlimited Recording">
+                                    <color key="titleColor" red="0.79733405410000002" green="0.0" blue="0.089166356399999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelUnlimited:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bYh-Wr-nkt"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoV-7X-3qr">
+                                <rect key="frame" x="0.0" y="-7" width="414" height="903"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NV5-Y2-hd2">
+                                <rect key="frame" x="47" y="275" width="320" height="213.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DCH-Cu-8Tq">
+                                        <rect key="frame" x="15" y="15" width="290" height="159"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel this session?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJr-8R-gA5">
+                                                <rect key="frame" x="0.0" y="0.0" width="290" height="43"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your hour session will end - any recorded kicks will still be saved" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQh-ri-eRC">
+                                                <rect key="frame" x="0.0" y="58" width="290" height="43"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iPH-GG-aOo">
+                                                <rect key="frame" x="0.0" y="116" width="290" height="43"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wj5-Ho-fMH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="141" height="43"/>
+                                                        <color key="backgroundColor" red="1" green="0.84499601960000004" blue="0.74862455289999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                        <state key="normal" title="Yes, cancel it">
+                                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="cancel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G4z-MZ-V9r"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctC-8S-frE">
+                                                        <rect key="frame" x="149" y="0.0" width="141" height="43"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                        <state key="normal" title="No, go back">
+                                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="doNotCancel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RgJ-7N-R6d"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.71847730990000003" green="0.89698215260000003" blue="0.73253083129999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="DCH-Cu-8Tq" firstAttribute="top" secondItem="NV5-Y2-hd2" secondAttribute="top" constant="15" id="7zy-tP-Evo"/>
+                                    <constraint firstItem="DCH-Cu-8Tq" firstAttribute="leading" secondItem="NV5-Y2-hd2" secondAttribute="leading" constant="15" id="F7U-r5-aF5"/>
+                                    <constraint firstAttribute="trailing" secondItem="DCH-Cu-8Tq" secondAttribute="trailing" constant="15" id="Peh-qp-IR8"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DCH-Cu-8Tq" secondAttribute="bottom" constant="20" id="mSl-ph-0yu"/>
+                                    <constraint firstAttribute="width" secondItem="NV5-Y2-hd2" secondAttribute="height" multiplier="3:2" id="tkO-vr-g94"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95568758249999997" green="1" blue="0.96361953020000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -196,22 +268,28 @@
                             <constraint firstItem="wEw-EZ-9AV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7JF-aJ-lSZ"/>
                             <constraint firstItem="8hZ-Bk-s7H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7K6-em-rnd"/>
                             <constraint firstItem="037-it-SEq" firstAttribute="centerY" secondItem="wEw-EZ-9AV" secondAttribute="centerY" id="AUM-po-6mr"/>
+                            <constraint firstItem="KGe-Xz-TgP" firstAttribute="top" secondItem="wEw-EZ-9AV" secondAttribute="bottom" constant="80" id="Buh-Ia-UL7"/>
+                            <constraint firstItem="4SR-G6-YiP" firstAttribute="centerY" secondItem="wEw-EZ-9AV" secondAttribute="centerY" id="CtD-P0-5eW"/>
+                            <constraint firstItem="NV5-Y2-hd2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="DbD-Zz-U9F"/>
                             <constraint firstItem="XYz-Xk-kpR" firstAttribute="top" secondItem="wEw-EZ-9AV" secondAttribute="bottom" constant="25" id="Dns-ZY-dzv"/>
-                            <constraint firstItem="KGe-Xz-TgP" firstAttribute="centerY" secondItem="wKM-Zf-ntu" secondAttribute="centerY" id="EKe-18-db2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NV5-Y2-hd2" secondAttribute="trailing" constant="47" id="Dv2-HW-yl6"/>
                             <constraint firstItem="037-it-SEq" firstAttribute="centerX" secondItem="wEw-EZ-9AV" secondAttribute="centerX" id="JDC-4a-Y1N"/>
                             <constraint firstItem="trl-1r-d4N" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="JxR-1Q-RIX"/>
                             <constraint firstItem="trl-1r-d4N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MyC-gJ-Ulq"/>
+                            <constraint firstItem="NV5-Y2-hd2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NfY-j5-tGA"/>
                             <constraint firstItem="y68-8l-Y15" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q0u-j2-mEX"/>
                             <constraint firstItem="trl-1r-d4N" firstAttribute="top" secondItem="y68-8l-Y15" secondAttribute="bottom" constant="31" id="Q3z-9l-Ccd"/>
-                            <constraint firstItem="KGe-Xz-TgP" firstAttribute="centerX" secondItem="wKM-Zf-ntu" secondAttribute="centerX" id="V93-cu-mf3"/>
                             <constraint firstItem="XYz-Xk-kpR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="W1Q-XE-JUa"/>
                             <constraint firstItem="gN2-H5-l6g" firstAttribute="centerX" secondItem="wEw-EZ-9AV" secondAttribute="centerX" id="aMZ-kn-hdD"/>
                             <constraint firstItem="fXv-Xv-zkI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dvp-E0-psi"/>
                             <constraint firstItem="gN2-H5-l6g" firstAttribute="centerY" secondItem="wEw-EZ-9AV" secondAttribute="centerY" id="ffW-1x-h6x"/>
+                            <constraint firstItem="NV5-Y2-hd2" firstAttribute="top" secondItem="KGe-Xz-TgP" secondAttribute="bottom" constant="57" id="jff-lr-QJd"/>
                             <constraint firstItem="IGu-Oa-yhz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jkj-WG-yZw"/>
+                            <constraint firstItem="4SR-G6-YiP" firstAttribute="centerX" secondItem="wEw-EZ-9AV" secondAttribute="centerX" id="mIU-dm-HRW"/>
                             <constraint firstItem="IGu-Oa-yhz" firstAttribute="top" secondItem="fXv-Xv-zkI" secondAttribute="bottom" constant="60" id="pos-qV-OsL"/>
                             <constraint firstItem="wEw-EZ-9AV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qNS-NX-CzQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XYz-Xk-kpR" secondAttribute="trailing" constant="20" id="rKT-XB-GpP"/>
+                            <constraint firstItem="KGe-Xz-TgP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vgx-oC-StT"/>
                             <constraint firstItem="wEw-EZ-9AV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xeX-cd-zfT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -220,9 +298,12 @@
                         <outlet property="beginButton" destination="wKM-Zf-ntu" id="2gu-Iz-Gc0"/>
                         <outlet property="bottomBannerAd" destination="trl-1r-d4N" id="6yD-0q-DcX"/>
                         <outlet property="cancelButton" destination="gN2-H5-l6g" id="ng4-i3-M1k"/>
+                        <outlet property="cancelUnlimited" destination="4SR-G6-YiP" id="N8i-oF-Cxt"/>
+                        <outlet property="confirmView" destination="NV5-Y2-hd2" id="kJ0-HS-7kt"/>
                         <outlet property="countdownTimer" destination="KGe-Xz-TgP" id="zQi-ul-w80"/>
                         <outlet property="currentDay" destination="2xI-dx-8du" id="hdy-b7-2TX"/>
                         <outlet property="currentHour" destination="hY5-2r-sPJ" id="zsg-Bl-Bsb"/>
+                        <outlet property="dimView" destination="IoV-7X-3qr" id="ahh-n0-38z"/>
                         <outlet property="howLongAgo" destination="1tm-H5-EsO" id="TzV-XU-cQU"/>
                         <outlet property="kicksPerCurrentDay" destination="VAl-DH-hJl" id="e2M-d7-Tn9"/>
                         <outlet property="kicksPerCurrentHour" destination="JIX-En-d7A" id="APi-Bq-ASE"/>
@@ -247,8 +328,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="BCY-gf-D2j">
                                 <rect key="frame" x="0.0" y="90" width="414" height="582"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4e5-yy-cxh" customClass="KickTableViewCell" customModule="Little_Roo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="kickCell" id="4e5-yy-cxh" customClass="KickTableViewCell" customModule="Little_Roo" customModuleProvider="target">
                                         <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4e5-yy-cxh" id="0yx-Fo-SdJ">
@@ -306,11 +388,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Hn-bT-8Z1">
-                                <rect key="frame" x="102.5" y="51.5" width="209" height="32"/>
+                                <rect key="frame" x="81.5" y="51.5" width="251" height="32"/>
                                 <segments>
-                                    <segment title="Session Kicks"/>
-                                    <segment title="All Kicks"/>
+                                    <segment title="   All Kicks   "/>
+                                    <segment title="   Session Kicks   "/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="vGn-M8-Vsi" eventType="valueChanged" id="Pdh-Oe-zet"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.95568758249282837" green="1" blue="0.96361953020095825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -12,6 +12,9 @@ struct KickManager {
     static var loaded: [Kick] = []
     
     static var sessionType: SessionType = .none
+    static var sessionNumber = 0
+    
+    static var sessionKicks: [Kick] = []
 }
 
 enum SessionType {

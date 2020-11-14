@@ -19,6 +19,7 @@
 		2D30C1C7254B626000BA61AC /* KickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1C6254B626000BA61AC /* KickManager.swift */; };
 		2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CB254B631600BA61AC /* KickViewModel.swift */; };
 		2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */; };
+		2DDB06CC255F046600358A57 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB06CB255F046600358A57 /* Timer.swift */; };
 		6DFDA4D11118E6812C78106D /* Pods_Little_Roo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB2ABBD10138887D590450E /* Pods_Little_Roo.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		2D30C1C6254B626000BA61AC /* KickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickManager.swift; sourceTree = "<group>"; };
 		2D30C1CB254B631600BA61AC /* KickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickViewModel.swift; sourceTree = "<group>"; };
 		2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		2DDB06CB255F046600358A57 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		76BCBE90A9451243C00939C1 /* Pods-Little Roo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Little Roo.release.xcconfig"; path = "Target Support Files/Pods-Little Roo/Pods-Little Roo.release.xcconfig"; sourceTree = "<group>"; };
 		EDB2ABBD10138887D590450E /* Pods_Little_Roo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Little_Roo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				2D30C1C6254B626000BA61AC /* KickManager.swift */,
+				2DDB06CB255F046600358A57 /* Timer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				2D30C1C7254B626000BA61AC /* KickManager.swift in Sources */,
 				2D30C1B4254B2F8D00BA61AC /* ViewController.swift in Sources */,
 				2D0DF4E3255DD92F002DFF45 /* KickTableViewCell.swift in Sources */,
+				2DDB06CC255F046600358A57 /* Timer.swift in Sources */,
 				2D30C1B0254B2F8D00BA61AC /* AppDelegate.swift in Sources */,
 				2D30C1B2254B2F8D00BA61AC /* SceneDelegate.swift in Sources */,
 				2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */,

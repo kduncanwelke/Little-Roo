@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: IBOutlets
     
@@ -17,10 +17,17 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomBannerAd: GADBannerView!
     
+    // MARK: Variables
+    
+    private let kickViewModel = KickViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         bottomBannerAd.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBannerAd.rootViewController = self
     }
@@ -64,8 +71,45 @@ class HistoryViewController: UIViewController {
     
     // MARK: IBActions
     
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        tableView.reloadData()
+    }
+    
     @IBAction func backPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension HistoryViewController {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if typeSelection.selectedSegmentIndex == 0 {
+            return "All Kicks"
+        } else {
+            return "Date"
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if typeSelection.selectedSegmentIndex == 0 {
+            return 1
+        } else {
+            return kickViewModel.getSessionSectionsTotal()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var data = kickViewModel.retrieveSource(section: typeSelection.selectedSegmentIndex)
+        
+        // group session kicks by their session date/time
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "kickCell", for: indexPath) as! KickTableViewCell
+        
+        cell.configure(index: indexPath, segment: typeSelection.selectedSegmentIndex)
+        
+        return cell
+    }
 }

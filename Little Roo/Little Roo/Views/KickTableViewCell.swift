@@ -14,6 +14,9 @@ class KickTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
     
+    // MARK: Variables
+    
+    private let kickViewModel = KickViewModel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,4 +29,12 @@ class KickTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func configure(index: IndexPath, segment: Int) {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd 'at' hh:mm a"
+        
+        if let kickDate = kickViewModel.getDate(index: index) {
+            timeLabel.text = dateFormatter.string(from: kickDate)
+        }
+    }
 }
