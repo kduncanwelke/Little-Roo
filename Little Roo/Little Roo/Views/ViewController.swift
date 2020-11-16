@@ -118,6 +118,7 @@ class ViewController: UIViewController {
         switch type {
         case .hour:
             // start timer
+            kickViewModel.newSession()
             countdownTimer.isHidden = false
             recordingType.isHidden = true
             beginButton.isHidden = true

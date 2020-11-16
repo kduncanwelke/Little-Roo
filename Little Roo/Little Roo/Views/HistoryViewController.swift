@@ -83,26 +83,17 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
 extension HistoryViewController {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if typeSelection.selectedSegmentIndex == 0 {
-            return "All Kicks"
-        } else {
-            return "Date"
-        }
+        return kickViewModel.getHeading(section: section, segment: typeSelection.selectedSegmentIndex)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if typeSelection.selectedSegmentIndex == 0 {
-            return 1
-        } else {
-            return kickViewModel.getSessionSectionsTotal()
-        }
+        return kickViewModel.getSectionsTotal(type: typeSelection.selectedSegmentIndex)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var data = kickViewModel.retrieveSource(section: typeSelection.selectedSegmentIndex)
+        var data = kickViewModel.retrieveSource(type: typeSelection.selectedSegmentIndex, section: section)
         
-        // group session kicks by their session date/time
-        return data.count
+        return data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

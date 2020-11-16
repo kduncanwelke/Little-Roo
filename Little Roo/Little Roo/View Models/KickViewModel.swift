@@ -19,14 +19,19 @@ public class KickViewModel {
             KickManager.loaded = try managedContext.fetch(fetchRequest)
             print("kicks loaded")
             
-            for kick in KickManager.loaded.reversed() {
-                if kick.session != nil {
-                    KickManager.sessionNumber = Int(kick.session)
-                    KickManager.sessionKicks.append(kick)
+            for kick in KickManager.loaded {
+                if kick.session != 0 {
+                    print(kick.session)
+                    KickManager.sessionKicks[Int(kick.session), default: []].append(kick)
                 }
             }
             
-            KickManager.sessionKicks.reverse()
+            // sort dictionary by key, then get last key
+            if let num = KickManager.sessionKicks.sorted(by: { $0.0 < $1.0 }).last?.key {
+                KickManager.sessionNumber = num
+                print("last session number")
+                print(num)
+            }
             
         } catch let error as NSError {
             //alertDelegate?.displayAlert(with: "Could not retrieve data", message: "\(error.userInfo)")
@@ -41,7 +46,16 @@ public class KickViewModel {
         newKick.time = date
         
         if isHourSession {
-            newKick.session = Int16(KickManager.sessionNumber)
+            newKick.session = Int64(KickManager.sessionNumber)
+        } else {
+            newKick.session = 0
+        }
+        
+        print(newKick.session)
+        // add to model
+        KickManager.loaded.append(newKick)
+        if newKick.session != 0 {
+            KickManager.sessionKicks[Int(newKick.session), default: []].append(newKick)
         }
         
         do {
@@ -53,26 +67,42 @@ public class KickViewModel {
         }
     }
     
-    func retrieveSource(section: Int) -> [Kick] {
-        if section == 0 {
+    func retrieveSource(type: Int, section: Int) -> [Kick]? {
+        if type == 0 {
             return KickManager.loaded
         } else {
-            return KickManager.sessionKicks
+            // 0 is reserved for non-session kicks, add 1 to index 
+            return KickManager.sessionKicks[section+1]
         }
     }
     
-    func getSessionSectionsTotal() -> Int {
-        return KickManager.sessionNumber + 1
+    func getSectionsTotal(type: Int) -> Int {
+        if type == 0 {
+            return 1
+        } else {
+            return KickManager.sessionNumber
+        }
     }
     
-    func getDate(index: IndexPath) -> Date? {
-        return KickManager.loaded[index.row].time
+    func getHeading(section: Int, segment: Int) -> String {
+        if segment == 0 {
+            return "All Kicks"
+        } else {
+            return "Session \(KickManager.sessionKicks[section+1])"
+        }
+    }
+    
+    func getDate(index: IndexPath, segment: Int) -> Date? {
+        if segment == 0 {
+            return KickManager.loaded[index.row].time
+        } else {
+            return KickManager.sessionKicks[index.section][index.row].time
+        }
     }
     
     func setSessionType(index: Int) {
         if index == 0 {
             KickManager.sessionType = .hour
-            
         } else if index == 1 {
             KickManager.sessionType = .free
         } else {
@@ -81,8 +111,11 @@ public class KickViewModel {
     }
     
     func retrieveSessionType() -> SessionType {
-        KickManager.sessionNumber += 1
         return KickManager.sessionType
+    }
+    
+    func newSession() {
+        KickManager.sessionNumber += 1
     }
     
     func getLastKick() -> Date? {

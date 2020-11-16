@@ -15,11 +15,11 @@
 		2D30C1B7254B2F8D00BA61AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D30C1B5254B2F8D00BA61AC /* Main.storyboard */; };
 		2D30C1B9254B2F9000BA61AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D30C1B8254B2F9000BA61AC /* Assets.xcassets */; };
 		2D30C1BC254B2F9000BA61AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D30C1BA254B2F9000BA61AC /* LaunchScreen.storyboard */; };
-		2D30C1C5254B609200BA61AC /* Kick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1C3254B609200BA61AC /* Kick.xcdatamodeld */; };
 		2D30C1C7254B626000BA61AC /* KickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1C6254B626000BA61AC /* KickManager.swift */; };
 		2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CB254B631600BA61AC /* KickViewModel.swift */; };
 		2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */; };
 		2DDB06CC255F046600358A57 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB06CB255F046600358A57 /* Timer.swift */; };
+		2DF375D325632911005223E9 /* Kick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DF375D125632910005223E9 /* Kick.xcdatamodeld */; };
 		6DFDA4D11118E6812C78106D /* Pods_Little_Roo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB2ABBD10138887D590450E /* Pods_Little_Roo.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,11 +35,11 @@
 		2D30C1B8254B2F9000BA61AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D30C1BB254B2F9000BA61AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D30C1BD254B2F9000BA61AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D30C1C4254B609200BA61AC /* Kick.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kick.xcdatamodel; sourceTree = "<group>"; };
 		2D30C1C6254B626000BA61AC /* KickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickManager.swift; sourceTree = "<group>"; };
 		2D30C1CB254B631600BA61AC /* KickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickViewModel.swift; sourceTree = "<group>"; };
 		2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2DDB06CB255F046600358A57 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		2DF375D225632911005223E9 /* Kick.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kick.xcdatamodel; sourceTree = "<group>"; };
 		76BCBE90A9451243C00939C1 /* Pods-Little Roo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Little Roo.release.xcconfig"; path = "Target Support Files/Pods-Little Roo/Pods-Little Roo.release.xcconfig"; sourceTree = "<group>"; };
 		EDB2ABBD10138887D590450E /* Pods_Little_Roo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Little_Roo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -82,11 +82,11 @@
 				2D30C1C8254B626600BA61AC /* Models */,
 				2D30C1CA254B629600BA61AC /* View Models */,
 				2D30C1C9254B628C00BA61AC /* Views */,
-				2D30C1C3254B609200BA61AC /* Kick.xcdatamodeld */,
 				2D30C1B5254B2F8D00BA61AC /* Main.storyboard */,
 				2D30C1CF254B673B00BA61AC /* Helpers */,
 				2D30C1B8254B2F9000BA61AC /* Assets.xcassets */,
 				2D30C1BA254B2F9000BA61AC /* LaunchScreen.storyboard */,
+				2DF375D125632910005223E9 /* Kick.xcdatamodeld */,
 				2D30C1BD254B2F9000BA61AC /* Info.plist */,
 			);
 			path = "Little Roo";
@@ -260,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D30C1C7254B626000BA61AC /* KickManager.swift in Sources */,
+				2DF375D325632911005223E9 /* Kick.xcdatamodeld in Sources */,
 				2D30C1B4254B2F8D00BA61AC /* ViewController.swift in Sources */,
 				2D0DF4E3255DD92F002DFF45 /* KickTableViewCell.swift in Sources */,
 				2DDB06CC255F046600358A57 /* Timer.swift in Sources */,
@@ -267,7 +268,6 @@
 				2D30C1B2254B2F8D00BA61AC /* SceneDelegate.swift in Sources */,
 				2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */,
 				2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */,
-				2D30C1C5254B609200BA61AC /* Kick.xcdatamodeld in Sources */,
 				2D0DF4E1255DC8BC002DFF45 /* HistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,12 +470,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2D30C1C3254B609200BA61AC /* Kick.xcdatamodeld */ = {
+		2DF375D125632910005223E9 /* Kick.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2D30C1C4254B609200BA61AC /* Kick.xcdatamodel */,
+				2DF375D225632911005223E9 /* Kick.xcdatamodel */,
 			);
-			currentVersion = 2D30C1C4254B609200BA61AC /* Kick.xcdatamodel */;
+			currentVersion = 2DF375D225632911005223E9 /* Kick.xcdatamodel */;
 			path = Kick.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

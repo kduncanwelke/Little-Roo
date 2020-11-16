@@ -33,7 +33,7 @@ class KickTableViewCell: UITableViewCell {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd 'at' hh:mm a"
         
-        if let kickDate = kickViewModel.getDate(index: index) {
+        if let kickDate = kickViewModel.getDate(index: index, segment: segment) {
             timeLabel.text = dateFormatter.string(from: kickDate)
         }
     }
