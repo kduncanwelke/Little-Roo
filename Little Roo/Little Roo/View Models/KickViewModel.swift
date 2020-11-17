@@ -19,16 +19,27 @@ public class KickViewModel {
             KickManager.loaded = try managedContext.fetch(fetchRequest)
             print("kicks loaded")
             
+            KickManager.loaded.reverse()
+            
             for kick in KickManager.loaded {
-                if kick.session != 0 {
-                    print(kick.session)
-                    KickManager.sessionKicks[Int(kick.session), default: []].append(kick)
+                if let hour = kick.hour {
+                    KickManager.sessionKicks[Int(hour.id), default: []].append(kick)
+                } else if let free = kick.free {
+                    KickManager.freeKicks[Int(free.id), default: []].append(kick)
                 }
             }
             
-            // sort dictionary by key, then get last key
-            if let num = KickManager.sessionKicks.sorted(by: { $0.0 < $1.0 }).last?.key {
-                KickManager.sessionNumber = num
+            print(KickManager.freeKicks)
+            
+            // sort dictionary by key, then get first key
+            if let num = KickManager.sessionKicks.sorted(by: { $0.0 > $1.0 }).first?.key {
+                KickManager.hourSessionNumber = num
+                print("last session number")
+                print(num)
+            }
+            
+            if let num = KickManager.freeKicks.sorted(by: { $0.0 > $1.0 }).first?.key {
+                KickManager.freeSessionNumber = num
                 print("last session number")
                 print(num)
             }
@@ -38,25 +49,30 @@ public class KickViewModel {
         }
     }
     
-    public func addKick(date: Date, isHourSession: Bool) {
+    public func addKick(date: Date, time: String, isHourSession: Bool) {
         var managedContext = CoreDataManager.shared.managedObjectContext
         
         // save new kick
         let newKick = Kick(context: managedContext)
-        newKick.time = date
         
         if isHourSession {
-            newKick.session = Int64(KickManager.sessionNumber)
+            var hour = Hour(context: managedContext)
+            hour.date = date
+            hour.id = Int64(KickManager.hourSessionNumber)
+            hour.timePassed = time
+            KickManager.sessionKicks[Int(hour.id), default: []].insert(newKick, at: 0)
+            newKick.hour = hour
         } else {
-            newKick.session = 0
+            var free = Free(context: managedContext)
+            free.date = date
+            free.id = Int64(KickManager.freeSessionNumber)
+            free.timePassed = time
+            KickManager.freeKicks[Int(free.id), default: []].insert(newKick, at: 0)
+            newKick.free = free
         }
-        
-        print(newKick.session)
-        // add to model
-        KickManager.loaded.append(newKick)
-        if newKick.session != 0 {
-            KickManager.sessionKicks[Int(newKick.session), default: []].append(newKick)
-        }
+       
+        // add to model, at the beginning so sorted by most recent
+        KickManager.loaded.insert(newKick, at: 0)
         
         do {
             try managedContext.save()
@@ -68,35 +84,65 @@ public class KickViewModel {
     }
     
     func retrieveSource(type: Int, section: Int) -> [Kick]? {
+        print(section)
         if type == 0 {
             return KickManager.loaded
-        } else {
-            // 0 is reserved for non-session kicks, add 1 to index 
+        } else if type == 1 {
+            // add 1 to section as sessions are indexed at one instead of zero
+            // to prevent confusion on the user end
             return KickManager.sessionKicks[section+1]
+        } else {
+            // add 1 to section as sessions are indexed at one instead of zero
+            // to prevent confusion on the user end
+            return KickManager.freeKicks[section+1]
         }
     }
     
     func getSectionsTotal(type: Int) -> Int {
         if type == 0 {
             return 1
+        } else if type == 1 {
+            return KickManager.hourSessionNumber
         } else {
-            return KickManager.sessionNumber
+            return KickManager.freeSessionNumber
         }
     }
     
     func getHeading(section: Int, segment: Int) -> String {
         if segment == 0 {
             return "All Kicks"
+        } else if segment == 1 {
+            // add 1 to section as sessions are indexed at one instead of zero
+            // to prevent confusion on the user end
+            if let session = KickManager.sessionKicks[section+1]?.first?.hour?.id {
+                return "Session #\(session)"
+            } else {
+                return "Session"
+            }
         } else {
-            return "Session \(KickManager.sessionKicks[section+1])"
+            // add 1 to section as sessions are indexed at one instead of zero
+            // to prevent confusion on the user end
+            if let session = KickManager.freeKicks[section+1]?.first?.free?.id {
+                return "Session #\(session)"
+            } else {
+                return "Session"
+            }
         }
     }
     
     func getDate(index: IndexPath, segment: Int) -> Date? {
         if segment == 0 {
-            return KickManager.loaded[index.row].time
+            if let hour = KickManager.loaded[index.row].hour {
+                return hour.date
+            } else if let free = KickManager.loaded[index.row].free {
+                return free.date
+            } else {
+                return nil
+            }
+        } else if segment == 1 {
+            return KickManager.sessionKicks[index.section]?[index.row].hour?.date
         } else {
-            return KickManager.sessionKicks[index.section][index.row].time
+            return KickManager.freeKicks[index.section]?[index.row].free?.date
         }
     }
     
@@ -115,11 +161,25 @@ public class KickViewModel {
     }
     
     func newSession() {
-        KickManager.sessionNumber += 1
+        switch KickManager.sessionType {
+        case .hour:
+            KickManager.hourSessionNumber += 1
+        case .free:
+            KickManager.freeSessionNumber += 1
+        case .none:
+            return
+        }
+        
     }
     
     func getLastKick() -> Date? {
-        return KickManager.loaded.last?.time
+        if let hour = KickManager.loaded.first?.hour {
+            return hour.date
+        } else if let free = KickManager.loaded.first?.free {
+            return free.date
+        } else {
+            return nil
+        }
     }
     
     func kicksToday() -> Int {
@@ -127,9 +187,17 @@ public class KickViewModel {
         var kicks = 0
        
         for kick in KickManager.loaded {
-            if let kickDate = kick.time {
-                if calendar.isDateInToday(kickDate) {
-                    kicks += 1
+            if let hour = kick.hour {
+                if let kickDate = hour.date {
+                    if calendar.isDateInToday(kickDate) {
+                        kicks += 1
+                    }
+                }
+            } else if let free = kick.free {
+                if let kickDate = free.date {
+                    if calendar.isDateInToday(kickDate) {
+                        kicks += 1
+                    }
                 }
             }
         }
@@ -139,13 +207,21 @@ public class KickViewModel {
     
     func kicksHour() -> Int {
         let calendar = Calendar.current
-        let hour = Calendar.current.component(.hour, from: Date())
+        let hourNow = Calendar.current.component(.hour, from: Date())
         var kicks = 0
         
         for kick in KickManager.loaded {
-            if let kickDate = kick.time {
-                if calendar.isDateInToday(kickDate) && Calendar.current.component(.hour, from: kickDate) == hour {
-                    kicks += 1
+            if let hour = kick.hour {
+                if let kickDate = hour.date {
+                    if calendar.isDateInToday(kickDate) && Calendar.current.component(.hour, from: kickDate) == hourNow {
+                        kicks += 1
+                    }
+                }
+            } else if let free = kick.free {
+                if let kickDate = free.date {
+                    if calendar.isDateInToday(kickDate) && Calendar.current.component(.hour, from: kickDate) == hourNow {
+                        kicks += 1
+                    }
                 }
             }
         }

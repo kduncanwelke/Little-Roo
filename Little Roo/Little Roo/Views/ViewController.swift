@@ -125,6 +125,7 @@ class ViewController: UIViewController {
             cancelButton.isHidden = false
             TimerManager.beginTimer(label: countdownTimer)
         case .free:
+            kickViewModel.newSession()
             recordingType.isHidden = true
             beginButton.isHidden = true
             cancelUnlimited.isHidden = false
@@ -146,22 +147,28 @@ class ViewController: UIViewController {
     
     @IBAction func recordKickPressed(_ sender: UIButton) {
         print("kick")
+        CountupTimer.stopTimer()
+        
         var type = kickViewModel.retrieveSessionType()
         
         switch type {
         case .hour:
-            kickViewModel.addKick(date: Date(), isHourSession: true)
+            kickViewModel.addKick(date: Date(), time: howLongAgo.text ?? "-:--", isHourSession: true)
             recentKick.text = dateFormatter.string(from: Date())
         case .free:
-            kickViewModel.addKick(date: Date(), isHourSession: false)
+            kickViewModel.addKick(date: Date(), time: howLongAgo.text ?? "-:--", isHourSession: false)
             recentKick.text = dateFormatter.string(from: Date())
         case .none:
             return
         }
+        
+        CountupTimer.beginTimer(label: howLongAgo)
     }
     
     @IBAction func cancel(_ sender: UIButton) {
         // if cancel confirmed for timed session
+        CountupTimer.stopTimer()
+        howLongAgo.text = "-:--"
         countdownTimer.isHidden = true
         beginButton.isHidden = false
         recordKickButton.alpha = 0.5
@@ -175,6 +182,8 @@ class ViewController: UIViewController {
     
     @IBAction func cancelUnlimited(_ sender: UIButton) {
         // unlimited recording mode cancelled
+        CountupTimer.stopTimer()
+        howLongAgo.text = "-:--"
         beginButton.isHidden = false
         recordKickButton.alpha = 0.5
         recordKickButton.isEnabled = false

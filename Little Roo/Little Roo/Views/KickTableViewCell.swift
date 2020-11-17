@@ -13,6 +13,8 @@ class KickTableViewCell: UITableViewCell {
     // MARK: IBOutlets
     
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     
     // MARK: Variables
     
@@ -31,10 +33,14 @@ class KickTableViewCell: UITableViewCell {
 
     func configure(index: IndexPath, segment: Int) {
         var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd 'at' hh:mm a"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        var timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "hh:mm a"
         
         if let kickDate = kickViewModel.getDate(index: index, segment: segment) {
-            timeLabel.text = dateFormatter.string(from: kickDate)
+            timeLabel.text = timeFormatter.string(from: kickDate)
+            dateLabel.text = dateFormatter.string(from: kickDate)
         }
     }
 }

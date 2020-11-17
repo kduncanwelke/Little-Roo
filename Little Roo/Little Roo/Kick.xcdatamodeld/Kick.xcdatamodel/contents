@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G6032" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Free" representedClassName="Free" syncable="YES" codeGenerationType="class">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timePassed" attributeType="String"/>
+        <relationship name="kick" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kick" inverseName="free" inverseEntity="Kick"/>
+    </entity>
+    <entity name="Hour" representedClassName="Hour" syncable="YES" codeGenerationType="class">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timePassed" attributeType="String"/>
+        <relationship name="kick" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kick" inverseName="hour" inverseEntity="Kick"/>
+    </entity>
     <entity name="Kick" representedClassName="Kick" syncable="YES" codeGenerationType="class">
-        <attribute name="session" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="free" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Free" inverseName="kick" inverseEntity="Free"/>
+        <relationship name="hour" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Hour" inverseName="kick" inverseEntity="Hour"/>
     </entity>
     <elements>
-        <element name="Kick" positionX="-54" positionY="-9" width="128" height="73"/>
+        <element name="Kick" positionX="-54" positionY="18" width="128" height="73"/>
+        <element name="Hour" positionX="-45" positionY="36" width="128" height="103"/>
+        <element name="Free" positionX="-27" positionY="45" width="128" height="103"/>
     </elements>
 </model>

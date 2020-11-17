@@ -330,27 +330,40 @@
                                 <rect key="frame" x="0.0" y="90" width="414" height="582"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="kickCell" id="4e5-yy-cxh" customClass="KickTableViewCell" customModule="Little_Roo" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="kickCell" rowHeight="70" id="4e5-yy-cxh" customClass="KickTableViewCell" customModule="Little_Roo" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55.5" width="374" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4e5-yy-cxh" id="0yx-Fo-SdJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YF-NA-CXs">
-                                                    <rect key="frame" x="20" y="10" width="334" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                    <color key="textColor" red="0.30937387213049866" green="0.68297511992389204" blue="0.34759867072338291" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="iry-BK-OmI">
+                                                    <rect key="frame" x="20" y="11" width="334" height="48"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YF-NA-CXs">
+                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="26"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                            <color key="textColor" red="0.30937387213049866" green="0.68297511992389204" blue="0.34759867072338291" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWB-IC-TLT">
+                                                            <rect key="frame" x="0.0" y="26" width="334" height="22"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                            <color key="textColor" red="0.91059077030000002" green="0.64916679440000002" blue="0.56438930610000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="5YF-NA-CXs" firstAttribute="leading" secondItem="0yx-Fo-SdJ" secondAttribute="leading" constant="20" id="hrD-jA-vxC"/>
-                                                <constraint firstItem="5YF-NA-CXs" firstAttribute="centerY" secondItem="0yx-Fo-SdJ" secondAttribute="centerY" id="kLE-aV-jOg"/>
-                                                <constraint firstAttribute="trailing" secondItem="5YF-NA-CXs" secondAttribute="trailing" constant="20" id="siN-pL-lyW"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="iry-BK-OmI" secondAttribute="bottom" id="GKy-Ke-sUl"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="iry-BK-OmI" secondAttribute="trailing" id="qhP-G2-xAg"/>
+                                                <constraint firstItem="iry-BK-OmI" firstAttribute="leading" secondItem="0yx-Fo-SdJ" secondAttribute="leadingMargin" id="tLO-Fj-PpV"/>
+                                                <constraint firstItem="iry-BK-OmI" firstAttribute="top" secondItem="0yx-Fo-SdJ" secondAttribute="topMargin" id="yL1-kP-g2y"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dateLabel" destination="yWB-IC-TLT" id="ftl-jc-BHk"/>
                                             <outlet property="timeLabel" destination="5YF-NA-CXs" id="EQq-vO-Acg"/>
                                         </connections>
                                     </tableViewCell>
@@ -388,10 +401,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Hn-bT-8Z1">
-                                <rect key="frame" x="81.5" y="51.5" width="251" height="32"/>
+                                <rect key="frame" x="57.5" y="51.5" width="299" height="32"/>
                                 <segments>
                                     <segment title="   All Kicks   "/>
-                                    <segment title="   Session Kicks   "/>
+                                    <segment title="   Session   "/>
+                                    <segment title="   Unlimited   "/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentChanged:" destination="vGn-M8-Vsi" eventType="valueChanged" id="Pdh-Oe-zet"/>

@@ -10,11 +10,14 @@ import Foundation
 
 struct KickManager {
     static var loaded: [Kick] = []
-    
+   
     static var sessionType: SessionType = .none
-    static var sessionNumber = 0
     
+    static var hourSessionNumber = 0
     static var sessionKicks: [Int: [Kick]] = [:]
+    
+    static var freeSessionNumber = 0
+    static var freeKicks: [Int: [Kick]] = [:]
 }
 
 enum SessionType {

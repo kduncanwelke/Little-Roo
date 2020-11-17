@@ -92,7 +92,7 @@ extension HistoryViewController {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var data = kickViewModel.retrieveSource(type: typeSelection.selectedSegmentIndex, section: section)
-        
+       
         return data?.count ?? 0
     }
     
