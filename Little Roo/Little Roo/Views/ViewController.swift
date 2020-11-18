@@ -162,6 +162,8 @@ class ViewController: UIViewController {
             return
         }
         
+        currentDay.text = "\(kickViewModel.kicksToday())"
+        currentHour.text = "\(kickViewModel.kicksHour())"
         CountupTimer.beginTimer(label: howLongAgo)
     }
     

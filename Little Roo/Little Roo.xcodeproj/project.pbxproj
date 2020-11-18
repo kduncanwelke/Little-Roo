@@ -18,6 +18,7 @@
 		2D30C1C7254B626000BA61AC /* KickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1C6254B626000BA61AC /* KickManager.swift */; };
 		2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CB254B631600BA61AC /* KickViewModel.swift */; };
 		2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */; };
+		2DB693672565D4B8007561B0 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB693662565D4B8007561B0 /* GraphViewController.swift */; };
 		2DDB06CC255F046600358A57 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB06CB255F046600358A57 /* Timer.swift */; };
 		2DF375D325632911005223E9 /* Kick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DF375D125632910005223E9 /* Kick.xcdatamodeld */; };
 		6DFDA4D11118E6812C78106D /* Pods_Little_Roo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB2ABBD10138887D590450E /* Pods_Little_Roo.framework */; };
@@ -38,6 +39,7 @@
 		2D30C1C6254B626000BA61AC /* KickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickManager.swift; sourceTree = "<group>"; };
 		2D30C1CB254B631600BA61AC /* KickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickViewModel.swift; sourceTree = "<group>"; };
 		2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		2DB693662565D4B8007561B0 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		2DDB06CB255F046600358A57 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		2DF375D225632911005223E9 /* Kick.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kick.xcdatamodel; sourceTree = "<group>"; };
 		76BCBE90A9451243C00939C1 /* Pods-Little Roo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Little Roo.release.xcconfig"; path = "Target Support Files/Pods-Little Roo/Pods-Little Roo.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				2D30C1B3254B2F8D00BA61AC /* ViewController.swift */,
 				2D0DF4E0255DC8BC002DFF45 /* HistoryViewController.swift */,
 				2D0DF4E2255DD92F002DFF45 /* KickTableViewCell.swift */,
+				2DB693662565D4B8007561B0 /* GraphViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				2D30C1B0254B2F8D00BA61AC /* AppDelegate.swift in Sources */,
 				2D30C1B2254B2F8D00BA61AC /* SceneDelegate.swift in Sources */,
 				2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */,
+				2DB693672565D4B8007561B0 /* GraphViewController.swift in Sources */,
 				2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */,
 				2D0DF4E1255DC8BC002DFF45 /* HistoryViewController.swift in Sources */,
 			);

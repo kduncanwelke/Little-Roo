@@ -34,15 +34,13 @@ public class KickViewModel {
             // sort dictionary by key, then get first key
             if let num = KickManager.sessionKicks.sorted(by: { $0.0 > $1.0 }).first?.key {
                 KickManager.hourSessionNumber = num
-                print("last session number")
-                print(num)
             }
             
             if let num = KickManager.freeKicks.sorted(by: { $0.0 > $1.0 }).first?.key {
                 KickManager.freeSessionNumber = num
-                print("last session number")
-                print(num)
             }
+            
+            print(KickManager.sessionKicks)
             
         } catch let error as NSError {
             //alertDelegate?.displayAlert(with: "Could not retrieve data", message: "\(error.userInfo)")
@@ -88,13 +86,11 @@ public class KickViewModel {
         if type == 0 {
             return KickManager.loaded
         } else if type == 1 {
-            // add 1 to section as sessions are indexed at one instead of zero
-            // to prevent confusion on the user end
-            return KickManager.sessionKicks[section+1]
+            // reverse order so most recent is first by subtracting scetion from total sessions
+            return KickManager.sessionKicks[KickManager.hourSessionNumber-section]
         } else {
-            // add 1 to section as sessions are indexed at one instead of zero
-            // to prevent confusion on the user end
-            return KickManager.freeKicks[section+1]
+           // reverse order so most recent is first by subtracting scetion from total sessions
+            return KickManager.freeKicks[KickManager.freeSessionNumber-section]
         }
     }
     
@@ -114,7 +110,7 @@ public class KickViewModel {
         } else if segment == 1 {
             // add 1 to section as sessions are indexed at one instead of zero
             // to prevent confusion on the user end
-            if let session = KickManager.sessionKicks[section+1]?.first?.hour?.id {
+            if let session = KickManager.sessionKicks[KickManager.hourSessionNumber-section]?.first?.hour?.id {
                 return "Session #\(session)"
             } else {
                 return "Session"
@@ -122,11 +118,27 @@ public class KickViewModel {
         } else {
             // add 1 to section as sessions are indexed at one instead of zero
             // to prevent confusion on the user end
-            if let session = KickManager.freeKicks[section+1]?.first?.free?.id {
+            if let session = KickManager.freeKicks[KickManager.freeSessionNumber-section]?.first?.free?.id {
                 return "Session #\(session)"
             } else {
                 return "Session"
             }
+        }
+    }
+    
+    func getTimePassed(index: IndexPath, segment: Int) -> String? {
+        if segment == 0 {
+            if let hour = KickManager.loaded[index.row].hour {
+                return hour.timePassed
+            } else if let free = KickManager.loaded[index.row].free {
+                return free.timePassed
+            } else {
+                return nil
+            }
+        } else if segment == 1 {
+            return KickManager.sessionKicks[KickManager.hourSessionNumber-index.section]?[index.row].hour?.timePassed
+        } else {
+            return KickManager.freeKicks[KickManager.freeSessionNumber-index.section]?[index.row].free?.timePassed
         }
     }
     
@@ -140,9 +152,9 @@ public class KickViewModel {
                 return nil
             }
         } else if segment == 1 {
-            return KickManager.sessionKicks[index.section]?[index.row].hour?.date
+            return KickManager.sessionKicks[KickManager.hourSessionNumber-index.section]?[index.row].hour?.date
         } else {
-            return KickManager.freeKicks[index.section]?[index.row].free?.date
+            return KickManager.freeKicks[KickManager.freeSessionNumber-index.section]?[index.row].free?.date
         }
     }
     

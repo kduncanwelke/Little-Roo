@@ -14,6 +14,7 @@ class KickTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timePassed: UILabel!
     
     
     // MARK: Variables
@@ -32,6 +33,8 @@ class KickTableViewCell: UITableViewCell {
     }
 
     func configure(index: IndexPath, segment: Int) {
+        timePassed.text = kickViewModel.getTimePassed(index: index, segment: segment)
+        
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
