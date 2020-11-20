@@ -204,5 +204,9 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "seeHistory", sender: Any?.self)
     }
     
+    @IBAction func seeGraph(_ sender: UIButton) {
+        performSegue(withIdentifier: "seeGraph", sender: Any?.self)
+    }
+    
 }
 

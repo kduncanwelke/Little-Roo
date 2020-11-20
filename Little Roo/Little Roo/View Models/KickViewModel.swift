@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Charts
 
 public class KickViewModel {
     
@@ -29,8 +30,6 @@ public class KickViewModel {
                 }
             }
             
-            print(KickManager.freeKicks)
-            
             // sort dictionary by key, then get first key
             if let num = KickManager.sessionKicks.sorted(by: { $0.0 > $1.0 }).first?.key {
                 KickManager.hourSessionNumber = num
@@ -39,9 +38,7 @@ public class KickViewModel {
             if let num = KickManager.freeKicks.sorted(by: { $0.0 > $1.0 }).first?.key {
                 KickManager.freeSessionNumber = num
             }
-            
-            print(KickManager.sessionKicks)
-            
+         
         } catch let error as NSError {
             //alertDelegate?.displayAlert(with: "Could not retrieve data", message: "\(error.userInfo)")
         }
@@ -239,5 +236,91 @@ public class KickViewModel {
         }
         
         return kicks
+    }
+    
+    func getGraphData(type: Int, startDate: Date?) -> [ChartDataEntry]? {
+        // hourly info, show for one day
+        if type == 0 {
+            guard let date = startDate else { return nil }
+            
+            var entries: [ChartDataEntry] = []
+            
+            sortKicksByHour(date: date)
+            
+            for (hour, kicks) in KickManager.hourKicks {
+                var entry = ChartDataEntry(x: Double(hour), y: Double(kicks.count))
+                entries.append(entry)
+            }
+            
+            return entries
+        } else {
+            // date info, show seven days
+            guard var date = startDate else { return nil }
+            var dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            var entries: [ChartDataEntry] = []
+            
+            sortKicksByDate()
+            
+            for i in 1...7 {
+                var stringDate = dateFormatter.string(from: date)
+                
+                if let kicks = KickManager.dayKicks[stringDate] {
+                    var entry = ChartDataEntry(x: Double(i), y: Double(kicks.count))
+                    entries.append(entry)
+                }
+                
+                date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+            }
+            
+            return entries
+        }
+    }
+    
+    func sortKicksByHour(date: Date) {
+        let calendar = Calendar.current
+       
+        for kick in KickManager.loaded {
+            if let hour = kick.hour {
+                if let kickDate = hour.date {
+                    if calendar.isDate(kickDate, inSameDayAs: date) {
+                        let kickDateHour = calendar.component(.hour, from: kickDate)
+                        KickManager.hourKicks[kickDateHour, default: []].append(kick)
+                    }
+                }
+            } else if let free = kick.free {
+                if let kickDate = free.date {
+                    if calendar.isDate(kickDate, inSameDayAs: date) {
+                        let kickDateHour = calendar.component(.hour, from: kickDate)
+                        KickManager.hourKicks[kickDateHour, default: []].append(kick)
+                    }
+                }
+            }
+        }
+    }
+    
+    func sortKicksByDate() {
+        let calendar = Calendar.current
+        
+        for kick in KickManager.loaded {
+            if let hour = kick.hour {
+                if let kickDate = hour.date {
+                    let components = calendar.dateComponents([.year, .month, .day], from: kickDate)
+                    if let year = components.year, let month = components.month, let day = components.day {
+                        let string = "\(year)-\(month)-\(day)"
+                        KickManager.dayKicks[string, default: []].append(kick)
+                    }
+                }
+            } else if let free = kick.free {
+                if let kickDate = free.date {
+                    let components = calendar.dateComponents([.year, .month, .day], from: kickDate)
+                    if let year = components.year, let month = components.month, let day = components.day {
+                        let string = "\(year)-\(month)-\(day)"
+                        KickManager.dayKicks[string, default: []].append(kick)
+                    }
+                }
+            }
+        }
     }
 }

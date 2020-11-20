@@ -18,6 +18,9 @@ struct KickManager {
     
     static var freeSessionNumber = 0
     static var freeKicks: [Int: [Kick]] = [:]
+    
+    static var hourKicks: [Int: [Kick]] = [:]
+    static var dayKicks: [String: [Kick]] = [:]
 }
 
 enum SessionType {
