@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     // MARK: Variables
     
     private let kickViewModel = KickViewModel()
+    private let timerViewModel = TimerViewModel()
     var dateFormatter = DateFormatter()
 
     override func viewDidLoad() {
@@ -47,6 +48,8 @@ class ViewController: UIViewController {
         kickViewModel.loadKicks()
         
         dateFormatter.dateFormat = "yyyy-MM-dd 'at' hh:mm a"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(endSession), name: NSNotification.Name(rawValue: "endSession"), object: nil)
         
         bottomBannerAd.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBannerAd.rootViewController = self
@@ -64,6 +67,10 @@ class ViewController: UIViewController {
         coordinator.animate(alongsideTransition: { _ in
             self.loadBannerAd()
         })
+    }
+    
+    @objc func endSession() {
+        stop()
     }
     
     func configureView() {
@@ -99,6 +106,18 @@ class ViewController: UIViewController {
         bottomBannerAd.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
         bottomBannerAd.load(GADRequest())
     }
+    
+    func stop() {
+        howLongAgo.text = "-:--"
+        countdownTimer.isHidden = true
+        beginButton.isHidden = false
+        recordKickButton.alpha = 0.5
+        recordKickButton.isEnabled = false
+        cancelButton.isHidden = true
+        recordingType.isHidden = false
+        dimView.isHidden = true
+        confirmView.isHidden = true
+    }
 
     // MARK: IBActions
     
@@ -123,7 +142,7 @@ class ViewController: UIViewController {
             recordingType.isHidden = true
             beginButton.isHidden = true
             cancelButton.isHidden = false
-            TimerManager.beginTimer(label: countdownTimer)
+            timerViewModel.beginTimer(label: countdownTimer)
         case .free:
             kickViewModel.newSession()
             recordingType.isHidden = true
@@ -147,7 +166,7 @@ class ViewController: UIViewController {
     
     @IBAction func recordKickPressed(_ sender: UIButton) {
         print("kick")
-        CountupTimer.stopTimer()
+        timerViewModel.stopCountUpTimer()
         
         var type = kickViewModel.retrieveSessionType()
         
@@ -164,27 +183,19 @@ class ViewController: UIViewController {
         
         currentDay.text = "\(kickViewModel.kicksToday())"
         currentHour.text = "\(kickViewModel.kicksHour())"
-        CountupTimer.beginTimer(label: howLongAgo)
+        timerViewModel.beginCountUpTimer(label: howLongAgo)
     }
     
     @IBAction func cancel(_ sender: UIButton) {
         // if cancel confirmed for timed session
-        CountupTimer.stopTimer()
-        howLongAgo.text = "-:--"
-        countdownTimer.isHidden = true
-        beginButton.isHidden = false
-        recordKickButton.alpha = 0.5
-        recordKickButton.isEnabled = false
-        cancelButton.isHidden = true
-        recordingType.isHidden = false
-        dimView.isHidden = true
-        confirmView.isHidden = true
-        TimerManager.stopTimer()
+        timerViewModel.stopCountUpTimer()
+        stop()
+        timerViewModel.stopTimer()
     }
     
     @IBAction func cancelUnlimited(_ sender: UIButton) {
         // unlimited recording mode cancelled
-        CountupTimer.stopTimer()
+        timerViewModel.stopCountUpTimer()
         howLongAgo.text = "-:--"
         beginButton.isHidden = false
         recordKickButton.alpha = 0.5

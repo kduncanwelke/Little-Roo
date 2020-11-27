@@ -241,6 +241,8 @@ public class KickViewModel {
     func getGraphData(type: Int, startDate: Date?) -> [ChartDataEntry]? {
         // hourly info, show for one day
         if type == 0 {
+            KickManager.hourKicks.removeAll()
+            
             guard let date = startDate else { return nil }
             
             var entries: [ChartDataEntry] = []
@@ -255,6 +257,8 @@ public class KickViewModel {
             return entries
         } else {
             // date info, show seven days
+            KickManager.dayKicks.removeAll()
+            
             guard var date = startDate else { return nil }
             var dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"

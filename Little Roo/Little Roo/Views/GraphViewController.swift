@@ -17,6 +17,7 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var bottomBannerAd: GADBannerView!
     
     private let kickViewModel = KickViewModel()
+    private let graphViewModel = GraphViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,25 +57,17 @@ class GraphViewController: UIViewController {
     }
     
     func updateChart() {
-        let entries = kickViewModel.getGraphData(type: type.selectedSegmentIndex, startDate: Date())
+        graphViewModel.getData(type: type.selectedSegmentIndex, date: Date())
         
-        print(entries)
-        let dataSet = LineChartDataSet(entries: entries, label: "Kicks")
-        let data = LineChartData(dataSets: [dataSet])
+        guard let dataSet = graphViewModel.getDataSet(), let data = graphViewModel.getLineChartData() else {
+            return
+        }
         
-        // FIXME: format dates
-        /*graphView.xAxis.valueFormatter = DefaultAxisValueFormatter(block: {(index, _) in
-            let date = HealthDataManager.dates[Int(index)]
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EE"
-            let currentDateString: String = dateFormatter.string(from: date)
-            
-            return currentDateString
-        })*/
+        graphView.xAxis.valueFormatter = graphViewModel.formatAxis(type: type.selectedSegmentIndex, date: Date())
         
         graphView.noDataText = "No history available"
         dataSet.valueFont = UIFont.systemFont(ofSize: 12.0)
-        dataSet.drawValuesEnabled = false
+       // dataSet.drawValuesEnabled = false
         graphView.data = data
         graphView.xAxis.labelFont = UIFont.systemFont(ofSize: 12.0)
         
@@ -87,9 +80,14 @@ class GraphViewController: UIViewController {
         graphView.xAxis.granularityEnabled = true
         graphView.xAxis.drawGridLinesEnabled = false
         
+        data.setDrawValues(true)
         dataSet.drawFilledEnabled = true
         dataSet.fillColor = UIColor.green
         dataSet.mode = .cubicBezier
+        dataSet.cubicIntensity = 0.2
+        dataSet.setCircleColor(UIColor.green)
+        dataSet.circleHoleColor = UIColor.green
+      
         //dataSet.fillFormatter = CubicLineSampleFillFormatter()
         
         graphView.rightAxis.enabled = false
