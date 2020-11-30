@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var typeDescription: UILabel!
     @IBOutlet weak var beginButton: UIButton!
     @IBOutlet weak var countdownTimer: UILabel!
+    @IBOutlet weak var complete: UILabel!
     
     @IBOutlet weak var recentKick: UILabel!
     @IBOutlet weak var howLongAgo: UILabel!
@@ -110,13 +111,15 @@ class ViewController: UIViewController {
     func stop() {
         howLongAgo.text = "-:--"
         countdownTimer.isHidden = true
-        beginButton.isHidden = false
         recordKickButton.alpha = 0.5
         recordKickButton.isEnabled = false
         cancelButton.isHidden = true
         recordingType.isHidden = false
         dimView.isHidden = true
         confirmView.isHidden = true
+        complete.animateFadeInSlow() {
+            self.beginButton.isHidden = false
+        }
     }
 
     // MARK: IBActions

@@ -67,14 +67,15 @@ class GraphViewController: UIViewController {
         
         graphView.noDataText = "No history available"
         dataSet.valueFont = UIFont.systemFont(ofSize: 12.0)
-       // dataSet.drawValuesEnabled = false
         graphView.data = data
+        
+        let format = NumberFormatter()
+        format.numberStyle = .none
+        let formatter = DefaultValueFormatter(formatter: format)
+        data.setValueFormatter(formatter)
+        
         graphView.xAxis.labelFont = UIFont.systemFont(ofSize: 12.0)
-        
-        // FIXME: get label count depending on kick quantity
-       // graphView.xAxis.setLabelCount(HealthDataManager.dates.count, force: true)
-       // graphView.xAxis.labelCount = HealthDataManager.dates.count
-        
+        graphView.xAxis.avoidFirstLastClippingEnabled = true
         graphView.xAxis.labelPosition = .bottom
         graphView.xAxis.granularity = 1.0
         graphView.xAxis.granularityEnabled = true
@@ -88,8 +89,6 @@ class GraphViewController: UIViewController {
         dataSet.setCircleColor(UIColor.green)
         dataSet.circleHoleColor = UIColor.green
       
-        //dataSet.fillFormatter = CubicLineSampleFillFormatter()
-        
         graphView.rightAxis.enabled = false
         graphView.leftAxis.enabled = true
         let emptyVals = [Highlight]()
@@ -97,18 +96,6 @@ class GraphViewController: UIViewController {
         
         dataSet.colors = ChartColorTemplates.material()
         graphView.notifyDataSetChanged()
-        
-        // FIXME: format dates
-        /*let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.setLocalizedDateFormatFromTemplate("ddMMyyyy")
-        let string = formatter.string(from: HealthDataManager.dates[0])
-        
-        // FIXME: show data on tap? (if it shows on graph skip)
-        let steps = Int(HealthDataManager.stepHistory[0])
-        tapSteps.text = "\(steps) steps"
-        tapDate.text = string
-        tapDistance.text = "\(Int(HealthDataManager.distances[0])) \(Measures.preferred.rawValue)"*/
         
         graphView.animate(yAxisDuration: 0.5)
     }

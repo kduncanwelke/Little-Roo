@@ -16,9 +16,11 @@ public class GraphViewModel {
     func getData(type: Int, date: Date) {
         GraphManager.entries?.removeAll()
         GraphManager.entries = kickViewModel.getGraphData(type: type, startDate: date)
+        print("get data")
     }
     
     func getDataSet() -> LineChartDataSet? {
+        print("get data set")
         GraphManager.dataSet = nil
         GraphManager.dataSet = LineChartDataSet(entries: GraphManager.entries, label: "Kicks")
         return GraphManager.dataSet
@@ -32,12 +34,26 @@ public class GraphViewModel {
         }
     }
     
+    func getAmPm(hour: Int) -> String {
+        if hour < 12 {
+            return "\(hour):00 am"
+        } else if hour == 12 {
+            return "\(hour):00pm"
+        } else if hour > 12 && hour < 24 {
+            var newHour = hour - 12
+            return "\(newHour):00pm"
+        } else {
+            return "12:00am"
+        }
+    }
+    
     func formatAxis(type: Int, date: Date) -> IAxisValueFormatter {
         DefaultAxisValueFormatter(block: {(index, _) in
             // hour view
             if type == 0 {
-                var string = Int(index)
-                return "\(string)"
+                let intified = Int(index)
+                var hour = self.getAmPm(hour: intified)
+                return hour
             } else {
                 // week view
                 let intified = Int(index)

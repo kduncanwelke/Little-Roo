@@ -217,6 +217,12 @@
                                     <action selector="cancelUnlimited:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bYh-Wr-nkt"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97d-5S-5Yp">
+                                <rect key="frame" x="131.5" y="175" width="151" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                <color key="textColor" red="0.3093738721" green="0.68297511990000004" blue="0.3475986707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoV-7X-3qr">
                                 <rect key="frame" x="0.0" y="-7" width="414" height="903"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -301,10 +307,12 @@
                             <constraint firstItem="NV5-Y2-hd2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NfY-j5-tGA"/>
                             <constraint firstItem="XYz-Xk-kpR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="W1Q-XE-JUa"/>
                             <constraint firstItem="gN2-H5-l6g" firstAttribute="centerX" secondItem="wEw-EZ-9AV" secondAttribute="centerX" id="aMZ-kn-hdD"/>
+                            <constraint firstItem="97d-5S-5Yp" firstAttribute="centerX" secondItem="KGe-Xz-TgP" secondAttribute="centerX" id="cEG-QP-Lbz"/>
                             <constraint firstItem="fXv-Xv-zkI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dvp-E0-psi"/>
                             <constraint firstItem="gN2-H5-l6g" firstAttribute="centerY" secondItem="wEw-EZ-9AV" secondAttribute="centerY" id="ffW-1x-h6x"/>
                             <constraint firstItem="NV5-Y2-hd2" firstAttribute="top" secondItem="KGe-Xz-TgP" secondAttribute="bottom" constant="57" id="jff-lr-QJd"/>
                             <constraint firstItem="IGu-Oa-yhz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jkj-WG-yZw"/>
+                            <constraint firstItem="97d-5S-5Yp" firstAttribute="centerY" secondItem="KGe-Xz-TgP" secondAttribute="centerY" id="kTD-j8-uVb"/>
                             <constraint firstItem="FQG-yn-2T0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kwd-iV-OvP"/>
                             <constraint firstItem="4SR-G6-YiP" firstAttribute="centerX" secondItem="wEw-EZ-9AV" secondAttribute="centerX" id="mIU-dm-HRW"/>
                             <constraint firstItem="trl-1r-d4N" firstAttribute="top" secondItem="FQG-yn-2T0" secondAttribute="bottom" constant="31" id="nhD-Sn-d9K"/>
@@ -321,6 +329,7 @@
                         <outlet property="bottomBannerAd" destination="trl-1r-d4N" id="6yD-0q-DcX"/>
                         <outlet property="cancelButton" destination="gN2-H5-l6g" id="ng4-i3-M1k"/>
                         <outlet property="cancelUnlimited" destination="4SR-G6-YiP" id="N8i-oF-Cxt"/>
+                        <outlet property="complete" destination="97d-5S-5Yp" id="rn9-zY-Rcu"/>
                         <outlet property="confirmView" destination="NV5-Y2-hd2" id="kJ0-HS-7kt"/>
                         <outlet property="countdownTimer" destination="KGe-Xz-TgP" id="zQi-ul-w80"/>
                         <outlet property="currentDay" destination="2xI-dx-8du" id="hdy-b7-2TX"/>

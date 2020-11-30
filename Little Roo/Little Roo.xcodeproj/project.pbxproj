@@ -18,6 +18,7 @@
 		2D30C1C7254B626000BA61AC /* KickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1C6254B626000BA61AC /* KickManager.swift */; };
 		2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CB254B631600BA61AC /* KickViewModel.swift */; };
 		2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */; };
+		2D37C5C725759114004BBF08 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37C5C625759114004BBF08 /* Animation.swift */; };
 		2DB693672565D4B8007561B0 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB693662565D4B8007561B0 /* GraphViewController.swift */; };
 		2DD47E6E256D9134007E2536 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD47E6D256D9134007E2536 /* GraphViewModel.swift */; };
 		2DD47E70256DA59C007E2536 /* GraphManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD47E6F256DA59C007E2536 /* GraphManager.swift */; };
@@ -41,6 +42,7 @@
 		2D30C1C6254B626000BA61AC /* KickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickManager.swift; sourceTree = "<group>"; };
 		2D30C1CB254B631600BA61AC /* KickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickViewModel.swift; sourceTree = "<group>"; };
 		2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		2D37C5C625759114004BBF08 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		2DB693662565D4B8007561B0 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		2DD47E6D256D9134007E2536 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		2DD47E6F256DA59C007E2536 /* GraphManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphManager.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				2D30C1CD254B66D900BA61AC /* CoreDataManager.swift */,
+				2D37C5C625759114004BBF08 /* Animation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				2D30C1CC254B631600BA61AC /* KickViewModel.swift in Sources */,
 				2DB693672565D4B8007561B0 /* GraphViewController.swift in Sources */,
 				2D30C1CE254B66D900BA61AC /* CoreDataManager.swift in Sources */,
+				2D37C5C725759114004BBF08 /* Animation.swift in Sources */,
 				2D0DF4E1255DC8BC002DFF45 /* HistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
