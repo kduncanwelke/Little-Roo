@@ -36,14 +36,14 @@ public class GraphViewModel {
     
     func getAmPm(hour: Int) -> String {
         if hour < 12 {
-            return "\(hour):00 am"
+            return "\(hour)am"
         } else if hour == 12 {
-            return "\(hour):00pm"
+            return "\(hour)pm"
         } else if hour > 12 && hour < 24 {
             var newHour = hour - 12
-            return "\(newHour):00pm"
+            return "\(newHour)pm"
         } else {
-            return "12:00am"
+            return "12am"
         }
     }
     
@@ -53,6 +53,7 @@ public class GraphViewModel {
             if type == 0 {
                 let intified = Int(index)
                 var hour = self.getAmPm(hour: intified)
+                print(hour)
                 return hour
             } else {
                 // week view
@@ -65,5 +66,33 @@ public class GraphViewModel {
                 return currentDateString
             }
         })
+    }
+    
+    func getColors() -> [NSUIColor] {
+        var colors: [NSUIColor] = []
+        
+        for i in GraphManager.entries! {
+            if i.y == 0 {
+                colors.append(UIColor.clear)
+            } else {
+                colors.append(UIColor.green)
+            }
+        }
+        
+        return colors
+    }
+    
+    func getLabelColors() -> [NSUIColor] {
+        var colors: [NSUIColor] = []
+        
+        for i in GraphManager.entries! {
+            if i.y == 0 {
+                colors.append(UIColor.clear)
+            } else {
+                colors.append(UIColor.black)
+            }
+        }
+        
+        return colors
     }
 }

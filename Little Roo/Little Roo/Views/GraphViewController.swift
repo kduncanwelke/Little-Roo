@@ -68,12 +68,20 @@ class GraphViewController: UIViewController {
         graphView.noDataText = "No history available"
         dataSet.valueFont = UIFont.systemFont(ofSize: 12.0)
         graphView.data = data
+        dataSet.valueColors = graphViewModel.getLabelColors()
         
+        // format values to ints
         let format = NumberFormatter()
         format.numberStyle = .none
         let formatter = DefaultValueFormatter(formatter: format)
         data.setValueFormatter(formatter)
         
+        // y-axis
+        graphView.leftAxis.spaceBottom = 0.1
+        graphView.rightAxis.enabled = false
+        graphView.leftAxis.enabled = true
+        
+        // x-axis
         graphView.xAxis.labelFont = UIFont.systemFont(ofSize: 12.0)
         graphView.xAxis.avoidFirstLastClippingEnabled = true
         graphView.xAxis.labelPosition = .bottom
@@ -81,16 +89,16 @@ class GraphViewController: UIViewController {
         graphView.xAxis.granularityEnabled = true
         graphView.xAxis.drawGridLinesEnabled = false
         
+        // values
         data.setDrawValues(true)
+        dataSet.drawCircleHoleEnabled = false
         dataSet.drawFilledEnabled = true
         dataSet.fillColor = UIColor.green
         dataSet.mode = .cubicBezier
         dataSet.cubicIntensity = 0.2
-        dataSet.setCircleColor(UIColor.green)
-        dataSet.circleHoleColor = UIColor.green
-      
-        graphView.rightAxis.enabled = false
-        graphView.leftAxis.enabled = true
+        dataSet.circleColors = graphViewModel.getColors()
+        
+        
         let emptyVals = [Highlight]()
         graphView.highlightValues(emptyVals)
         

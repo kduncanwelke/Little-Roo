@@ -249,9 +249,14 @@ public class KickViewModel {
             
             sortKicksByHour(date: date)
             
-            for (hour, kicks) in KickManager.hourKicks {
-                var entry = ChartDataEntry(x: Double(hour), y: Double(kicks.count))
-                entries.append(entry)
+            for i in 1...24 {
+                if let kicks = KickManager.hourKicks[i] {
+                    var entry = ChartDataEntry(x: Double(i), y: Double(kicks.count))
+                    entries.append(entry)
+                } else {
+                    var entry = ChartDataEntry(x: Double(i), y: Double(0))
+                    entries.append(entry)
+                }
             }
             
             return entries
@@ -272,6 +277,9 @@ public class KickViewModel {
                 
                 if let kicks = KickManager.dayKicks[stringDate] {
                     var entry = ChartDataEntry(x: Double(i), y: Double(kicks.count))
+                    entries.append(entry)
+                } else {
+                    var entry = ChartDataEntry(x: Double(i), y: Double(0))
                     entries.append(entry)
                 }
                 
