@@ -546,29 +546,77 @@
                                     <action selector="back:" destination="X6Y-LK-Rim" eventType="touchUpInside" id="rdQ-co-gbH"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFW-2k-wXi">
+                                <rect key="frame" x="159" y="423" width="96.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="ide-17-l2t">
+                                <rect key="frame" x="94" y="463.5" width="226" height="46"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXm-qU-1mW">
+                                        <rect key="frame" x="0.0" y="0.0" width="97" height="46"/>
+                                        <color key="backgroundColor" red="1" green="0.84499601960000004" blue="0.74862455289999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="97" id="AdQ-6D-8AA"/>
+                                            <constraint firstAttribute="height" constant="46" id="RJS-I7-alZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <state key="normal" title="Forward">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="forwardPressed:" destination="X6Y-LK-Rim" eventType="touchUpInside" id="aW1-Zb-pa7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRu-lQ-2UO">
+                                        <rect key="frame" x="129" y="0.0" width="97" height="46"/>
+                                        <color key="backgroundColor" red="1" green="0.84499601960000004" blue="0.74862455289999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="eoY-3d-tFQ"/>
+                                            <constraint firstAttribute="width" constant="97" id="xGf-93-JcG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backPressed:" destination="X6Y-LK-Rim" eventType="touchUpInside" id="6c6-GC-5Fj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.95568758249282837" green="1" blue="0.96361953020095825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0at-gp-n96" firstAttribute="trailing" secondItem="XAv-WO-eOE" secondAttribute="trailing" id="0Fu-JR-wco"/>
                             <constraint firstItem="oid-Yw-vNF" firstAttribute="bottom" secondItem="XAv-WO-eOE" secondAttribute="bottom" id="Az1-WT-Him"/>
                             <constraint firstItem="bY7-SK-fva" firstAttribute="leading" secondItem="XAv-WO-eOE" secondAttribute="leading" id="E70-xl-e1G"/>
+                            <constraint firstItem="wFW-2k-wXi" firstAttribute="top" secondItem="0at-gp-n96" secondAttribute="bottom" constant="20" id="EWr-kJ-4yU"/>
                             <constraint firstItem="u7O-eH-Kdm" firstAttribute="centerY" secondItem="bY7-SK-fva" secondAttribute="centerY" id="Gld-Hd-Rx1"/>
                             <constraint firstItem="bY7-SK-fva" firstAttribute="top" secondItem="XAv-WO-eOE" secondAttribute="top" id="HB9-7H-PO9"/>
                             <constraint firstItem="oid-Yw-vNF" firstAttribute="leading" secondItem="XAv-WO-eOE" secondAttribute="leading" id="Nlc-Qn-bQk"/>
                             <constraint firstItem="bY7-SK-fva" firstAttribute="trailing" secondItem="XAv-WO-eOE" secondAttribute="trailing" id="Nyz-87-pTb"/>
                             <constraint firstItem="oid-Yw-vNF" firstAttribute="width" secondItem="oid-Yw-vNF" secondAttribute="height" multiplier="69:14" id="OuD-ZI-G2J"/>
+                            <constraint firstItem="ide-17-l2t" firstAttribute="top" secondItem="wFW-2k-wXi" secondAttribute="bottom" constant="20" id="a3N-TH-jDS"/>
                             <constraint firstItem="0at-gp-n96" firstAttribute="top" secondItem="bY7-SK-fva" secondAttribute="bottom" constant="20" id="hgD-Yv-FQe"/>
                             <constraint firstItem="oid-Yw-vNF" firstAttribute="trailing" secondItem="XAv-WO-eOE" secondAttribute="trailing" id="l41-zf-fB3"/>
+                            <constraint firstItem="ide-17-l2t" firstAttribute="centerX" secondItem="MhA-TU-J0u" secondAttribute="centerX" id="lWJ-Nn-LWp"/>
                             <constraint firstItem="OBz-H8-kqg" firstAttribute="centerX" secondItem="MhA-TU-J0u" secondAttribute="centerX" id="mww-QP-ifA"/>
                             <constraint firstItem="0at-gp-n96" firstAttribute="leading" secondItem="XAv-WO-eOE" secondAttribute="leading" id="rxC-iK-lFU"/>
                             <constraint firstItem="oid-Yw-vNF" firstAttribute="top" secondItem="OBz-H8-kqg" secondAttribute="bottom" constant="31" id="tQk-nd-UpV"/>
                             <constraint firstItem="u7O-eH-Kdm" firstAttribute="centerX" secondItem="bY7-SK-fva" secondAttribute="centerX" id="wUS-Ov-XC1"/>
+                            <constraint firstItem="wFW-2k-wXi" firstAttribute="centerX" secondItem="MhA-TU-J0u" secondAttribute="centerX" id="zJW-yh-YgV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XAv-WO-eOE"/>
                     </view>
                     <navigationItem key="navigationItem" id="T63-89-G6c"/>
                     <connections>
+                        <outlet property="backButton" destination="hRu-lQ-2UO" id="e9a-KW-olM"/>
                         <outlet property="bottomBannerAd" destination="oid-Yw-vNF" id="FTX-4n-1ff"/>
+                        <outlet property="dayLabel" destination="wFW-2k-wXi" id="dIW-K6-07v"/>
+                        <outlet property="forwardButton" destination="GXm-qU-1mW" id="k16-5M-s7i"/>
                         <outlet property="graphView" destination="0at-gp-n96" id="UE7-GG-eli"/>
                         <outlet property="type" destination="u7O-eH-Kdm" id="DXd-eb-WDX"/>
                     </connections>
