@@ -53,14 +53,13 @@ public class GraphViewModel {
             if type == 0 {
                 let intified = Int(index)
                 var hour = self.getAmPm(hour: intified)
-                print(hour)
                 return hour
             } else {
                 // week view
-                let intified = Int(index)
+                let intified = Int(index - 1)
                 var day = Calendar.current.date(byAdding: .day, value: -intified, to: date)!
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "EE"
+                dateFormatter.dateFormat = "EE \n dd"
                 let currentDateString: String = dateFormatter.string(from: day)
         
                 return currentDateString

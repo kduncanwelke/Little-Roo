@@ -251,7 +251,7 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wj5-Ho-fMH">
                                                         <rect key="frame" x="0.0" y="0.0" width="141" height="43"/>
-                                                        <color key="backgroundColor" red="1" green="0.84499601960000004" blue="0.74862455289999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="0.84313725490196079" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                         <state key="normal" title="Yes, cancel it">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -276,7 +276,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.71847730990000003" green="0.89698215260000003" blue="0.73253083129999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.71764705882352942" green="0.89803921568627454" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="DCH-Cu-8Tq" firstAttribute="top" secondItem="NV5-Y2-hd2" secondAttribute="top" constant="15" id="7zy-tP-Evo"/>
                                     <constraint firstItem="DCH-Cu-8Tq" firstAttribute="leading" secondItem="NV5-Y2-hd2" secondAttribute="leading" constant="15" id="F7U-r5-aF5"/>

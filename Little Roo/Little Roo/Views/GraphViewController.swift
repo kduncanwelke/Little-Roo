@@ -72,7 +72,7 @@ class GraphViewController: UIViewController {
             return
         }
         
-        graphView.xAxis.valueFormatter = graphViewModel.formatAxis(type: type.selectedSegmentIndex, date: Date())
+        graphView.xAxis.valueFormatter = graphViewModel.formatAxis(type: type.selectedSegmentIndex, date: date)
         
         graphView.noDataText = "No history available"
         dataSet.valueFont = UIFont.systemFont(ofSize: 12.0)
@@ -119,7 +119,7 @@ class GraphViewController: UIViewController {
     
     func formatDate() {
         var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "MMM dd, yyyy"
         var dateString = dateFormatter.string(from: date)
         
         if type.selectedSegmentIndex == 0 {
@@ -142,18 +142,23 @@ class GraphViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func forwardPressed(_ sender: UIButton) {
-        // cancel if current date is today, you can't time travel
+        // cancel if current date is today, you can't time travel into the future
         if Calendar.current.isDateInToday(date) {
             return
         }
         
         if type.selectedSegmentIndex == 0 {
-            // go back a day
+            // go forward a day
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
             updateChart()
         } else {
-            // go back a week
-            date = Calendar.current.date(byAdding: .day, value: 7, to: date)!
+            // go forward a week
+            if Calendar.current.date(byAdding: .day, value: 7, to: date)! > Date() {
+                date = Date()
+            } else {
+                date = Calendar.current.date(byAdding: .day, value: 7, to: date)!
+            }
+            
             updateChart()
         }
         
@@ -181,8 +186,6 @@ class GraphViewController: UIViewController {
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        // pop back to current date when switching day/week view
-        date = Date()
         updateChart()
         formatDate()
     }
