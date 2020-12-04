@@ -35,7 +35,9 @@ public class GraphViewModel {
     }
     
     func getAmPm(hour: Int) -> String {
-        if hour < 12 {
+        if hour == 0 {
+            return "12am"
+        } else if hour < 12 {
             return "\(hour)am"
         } else if hour == 12 {
             return "\(hour)pm"
@@ -43,7 +45,7 @@ public class GraphViewModel {
             var newHour = hour - 12
             return "\(newHour)pm"
         } else {
-            return "12am"
+            return ""
         }
     }
     
@@ -51,20 +53,30 @@ public class GraphViewModel {
         DefaultAxisValueFormatter(block: {(index, _) in
             // hour view
             if type == 0 {
-                let intified = Int(index)
-                var hour = self.getAmPm(hour: intified)
-                return hour
+                var result = self.getHour(index: index)
+                return result
             } else {
                 // week view
-                let intified = Int(index - 1)
-                var day = Calendar.current.date(byAdding: .day, value: -intified, to: date)!
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "EE \n dd"
-                let currentDateString: String = dateFormatter.string(from: day)
-        
-                return currentDateString
+                var result = self.getDay(index: index, date: date)
+                return result
             }
         })
+    }
+    
+    func getHour(index: Double) -> String {
+        let intified = Int(index)
+        var hour = getAmPm(hour: intified)
+        return hour
+    }
+    
+    func getDay(index: Double, date: Date) -> String {
+        let intified = Int(index)
+        var day = Calendar.current.date(byAdding: .day, value: -intified, to: date)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EE \n dd"
+        let currentDateString: String = dateFormatter.string(from: day)
+        
+        return currentDateString
     }
     
     func getColors() -> [NSUIColor] {

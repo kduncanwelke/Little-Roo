@@ -15,6 +15,7 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var graphView: LineChartView!
     @IBOutlet weak var type: UISegmentedControl!
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var selectedLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var bottomBannerAd: GADBannerView!
@@ -28,6 +29,7 @@ class GraphViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        graphView.delegate = self
         updateChart()
         
         // start date is now, so you can't go back
@@ -92,11 +94,10 @@ class GraphViewController: UIViewController {
         
         // x-axis
         graphView.xAxis.labelFont = UIFont.systemFont(ofSize: 12.0)
-        graphView.xAxis.avoidFirstLastClippingEnabled = true
         graphView.xAxis.labelPosition = .bottom
-        graphView.xAxis.granularity = 1.0
-        graphView.xAxis.granularityEnabled = true
         graphView.xAxis.drawGridLinesEnabled = false
+        graphView.xAxis.centerAxisLabelsEnabled = true
+        graphView.xAxis.labelCount = 7
         
         // values
         data.setDrawValues(true)
@@ -107,17 +108,16 @@ class GraphViewController: UIViewController {
         dataSet.cubicIntensity = 0.2
         dataSet.circleColors = graphViewModel.getColors()
         
-        
         let emptyVals = [Highlight]()
         graphView.highlightValues(emptyVals)
         
-        //dataSet.colors = ChartColorTemplates.material()
         graphView.notifyDataSetChanged()
         
         graphView.animate(yAxisDuration: 0.5)
     }
     
     func formatDate() {
+        selectedLabel.text = ""
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         var dateString = dateFormatter.string(from: date)
@@ -194,4 +194,16 @@ class GraphViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension GraphViewController: ChartViewDelegate {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        let index = entry.x - 1
+        
+        if type.selectedSegmentIndex == 0 {
+            selectedLabel.text = graphViewModel.getHour(index: index)
+        } else {
+            selectedLabel.text = graphViewModel.getDay(index: index, date: date)
+        }
+    }
 }

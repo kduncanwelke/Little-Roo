@@ -314,23 +314,19 @@ public class KickViewModel {
     
     func sortKicksByDate() {
         let calendar = Calendar.current
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         for kick in KickManager.loaded {
             if let hour = kick.hour {
                 if let kickDate = hour.date {
-                    let components = calendar.dateComponents([.year, .month, .day], from: kickDate)
-                    if let year = components.year, let month = components.month, let day = components.day {
-                        let string = "\(year)-\(month)-\(day)"
-                        KickManager.dayKicks[string, default: []].append(kick)
-                    }
+                    let string = dateFormatter.string(from: kickDate)
+                    KickManager.dayKicks[string, default: []].append(kick)
                 }
             } else if let free = kick.free {
                 if let kickDate = free.date {
-                    let components = calendar.dateComponents([.year, .month, .day], from: kickDate)
-                    if let year = components.year, let month = components.month, let day = components.day {
-                        let string = "\(year)-\(month)-\(day)"
-                        KickManager.dayKicks[string, default: []].append(kick)
-                    }
+                    let string = dateFormatter.string(from: kickDate)
+                    KickManager.dayKicks[string, default: []].append(kick)
                 }
             }
         }
