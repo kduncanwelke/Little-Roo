@@ -214,6 +214,10 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func infoPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "viewAppInfo", sender: Any?.self)
+    }
+    
     @IBAction func seeHistory(_ sender: UIButton) {
         performSegue(withIdentifier: "seeHistory", sender: Any?.self)
     }

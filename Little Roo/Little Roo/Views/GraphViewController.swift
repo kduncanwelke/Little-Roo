@@ -16,6 +16,7 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var type: UISegmentedControl!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var selectedLabel: UILabel!
+    @IBOutlet weak var kickNumber: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var bottomBannerAd: GADBannerView!
@@ -118,6 +119,7 @@ class GraphViewController: UIViewController {
     
     func formatDate() {
         selectedLabel.text = ""
+        kickNumber.text = ""
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         var dateString = dateFormatter.string(from: date)
@@ -202,8 +204,12 @@ extension GraphViewController: ChartViewDelegate {
         
         if type.selectedSegmentIndex == 0 {
             selectedLabel.text = graphViewModel.getHour(index: index)
+            var number = Int(entry.y)
+            kickNumber.text = "\(number) Kicks"
         } else {
             selectedLabel.text = graphViewModel.getDay(index: index, date: date)
+            var number = Int(entry.y)
+            kickNumber.text = "\(number) Kicks"
         }
     }
 }
