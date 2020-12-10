@@ -79,7 +79,6 @@ public class KickViewModel {
     }
     
     func retrieveSource(type: Int, section: Int) -> [Kick]? {
-        print(section)
         if type == 0 {
             return KickManager.loaded
         } else if type == 1 {
@@ -88,6 +87,16 @@ public class KickViewModel {
         } else {
            // reverse order so most recent is first by subtracting scetion from total sessions
             return KickManager.freeKicks[KickManager.freeSessionNumber-section]
+        }
+    }
+    
+    func isEmpty(type: Int) -> Bool {
+        if type == 0 {
+            return KickManager.loaded.isEmpty
+        } else if type == 1 {
+            return KickManager.sessionKicks.isEmpty
+        } else {
+            return KickManager.freeKicks.isEmpty
         }
     }
     

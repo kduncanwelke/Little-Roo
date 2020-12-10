@@ -28,12 +28,30 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        typeSelection.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        
+        if #available(iOS 13.0, *) {
+            typeSelection.selectedSegmentTintColor = UIColor.white
+        } else {
+            // Fallback on earlier versions
+        }
+        
         bottomBannerAd.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBannerAd.rootViewController = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         loadBannerAd()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -73,6 +91,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         tableView.reloadData()
+        
+        if kickViewModel.isEmpty(type: typeSelection.selectedSegmentIndex) == false {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     @IBAction func backPressed(_ sender: UIButton) {

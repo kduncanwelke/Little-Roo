@@ -20,7 +20,7 @@ public class TimerViewModel {
         
         TimerViewModel.stopped = false
         // hour total in seconds
-        let maxTime = 5//3600
+        let maxTime = 3600
         TimerViewModel.seconds = maxTime
         
         TimerViewModel.time = maxTime

@@ -47,6 +47,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         kickViewModel.loadKicks()
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        recordingType.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        
+        if #available(iOS 13.0, *) {
+            recordingType.selectedSegmentTintColor = UIColor.white
+        } else {
+            // Fallback on earlier versions
+        }
         
         dateFormatter.dateFormat = "yyyy-MM-dd 'at' hh:mm a"
         
@@ -60,6 +68,15 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         loadBannerAd()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -16,7 +16,6 @@ class KickTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timePassed: UILabel!
     
-    
     // MARK: Variables
     
     private let kickViewModel = KickViewModel()

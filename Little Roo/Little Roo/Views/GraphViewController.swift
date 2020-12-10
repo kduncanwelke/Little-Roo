@@ -37,12 +37,31 @@ class GraphViewController: UIViewController {
         forwardButton.isEnabled = false
         formatDate()
         
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        type.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        
+        if #available(iOS 13.0, *) {
+            type.selectedSegmentTintColor = UIColor.white
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
         bottomBannerAd.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBannerAd.rootViewController = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         loadBannerAd()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -16,6 +16,14 @@ class AboutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -30,9 +38,13 @@ class AboutViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func privacyPolicyTapped(_ sender: UIButton) {
+        guard let url = URL(string: "http://kduncan-welke.com/littlerooprivacy.php") else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func admobPrivacyTapped(_ sender: UIButton) {
+        guard let url = URL(string: "https://support.google.com/admob/answer/6128543?hl=en") else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
